@@ -30,17 +30,27 @@ describe TicTacToe do
       end
     end
     
-    context "player 1 trieds to take an occupied spot" do
-      it "does not add the spot to the player" do
-        t.take_spot(:player_1, 5)
-        t.take_spot(:player_1, 5)
-        t.players[:player_1].count.should == 1
-        t.board.compact.count.should == 8
+    context "player 1 trieds to take an unavailable spot" do
+      context "when the spot has already been taken" do
+        it "does not add the spot to the player" do
+          t.take_spot(:player_1, 5)
+          t.take_spot(:player_1, 5)
+          t.players[:player_1].count.should == 1
+          t.board.compact.count.should == 8
+        end
+      end
+
+      context "when the spot is not on the board" do
+        it "does not add the spot to the player" do
+          t.take_spot(:player_1, 15)
+          t.players[:player_1].count.should == 0
+          t.board.compact.count.should == 9
+        end
       end
     end 
 
-    context "the players" do
-      it "has one spot each" do
+    context "each player" do
+      it "has one spot" do
         t.take_spot(:player_1, 0)
         t.take_spot(:player_2, 1)
         t.players[:player_1].count.should == 1
@@ -88,7 +98,7 @@ describe TicTacToe do
   end
   
   context "When alternating plays" do
-    context "Player 1" do
+    context "player 1" do
       it "wins" do
         t.take_spot(:player_1, 0).should == nil
         t.take_spot(:player_2, 1).should == nil
@@ -97,6 +107,20 @@ describe TicTacToe do
         t.take_spot(:player_1, 6).should == nil
         t.take_spot(:player_2, 7).should == nil
         t.take_spot(:player_1, 8).should == "player_1 wins!" 
+      end
+    end
+
+    context "neither player can win" do
+      it "the game is hung" do
+        t.take_spot(:player_1, 0).should == nil
+        t.take_spot(:player_2, 4).should == nil
+        t.take_spot(:player_1, 1).should == nil
+        t.take_spot(:player_2, 2).should == nil
+        t.take_spot(:player_1, 6).should == nil
+        t.take_spot(:player_2, 7).should == nil
+        t.take_spot(:player_1, 5).should == nil 
+        t.take_spot(:player_2, 3).should == nil 
+        t.take_spot(:player_1, 8).should == "The game is hung" 
       end
     end
   end
