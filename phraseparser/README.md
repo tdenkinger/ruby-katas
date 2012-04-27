@@ -1,0 +1,1 @@
+This is an attempt to try out Bob Martin's estimation exercise.  The goal is to take the first 237 words of the Gettysburg Address and break the lines up so that they fit on a bookmark.  The bookmark can accommodate a line that is 13 characters long maximum. 
