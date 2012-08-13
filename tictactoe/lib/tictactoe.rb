@@ -18,6 +18,10 @@ class TicTacToe
     return "The game is hung" if is_hung? 
   end
 
+  def number_of_unclaimed_spots 
+    board.compact.count
+  end
+
   private
 
   def is_winner?(player)

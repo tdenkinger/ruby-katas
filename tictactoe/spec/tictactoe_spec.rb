@@ -2,11 +2,12 @@ require_relative "../lib/tictactoe.rb"
 
 describe TicTacToe do
   let(:t){ TicTacToe.new }
+  let(:total_squares){9}
 
   context "before any moves have been made" do
     context "the board" do
       it "has a full bag of spots" do
-        t.board.count.should == 9
+        t.board.count.should == total_squares
       end
     end
   
@@ -26,19 +27,20 @@ describe TicTacToe do
   context "after one pair of moves" do
     context "the board" do
       it "has 7 spots remaining" do
-        t.take_spot(:player_1, 0)
-        t.take_spot(:player_2, 1)
-        t.board.compact.count.should == 7
+        expect {
+          t.take_spot(:player_1, 0)
+          t.take_spot(:player_2, 1)
+        }.to change{t.number_of_unclaimed_spots}.by(-2)
       end
     end
     
     context "player 1 trieds to take an unavailable spot" do
       context "when the spot has already been taken" do
         it "does not add the spot to the player" do
-          t.take_spot(:player_1, 5)
-          t.take_spot(:player_1, 5)
-          t.players[:player_1].count.should == 1
-          t.board.compact.count.should == 8
+          expect {
+            t.take_spot(:player_1, 5)
+            t.take_spot(:player_2, 5)
+          }.to change{t.number_of_unclaimed_spots}.by(-1)
         end
       end
 
