@@ -5,12 +5,6 @@ describe "Fizzbuzz" do
     @fb = Fizzbuzz.new
   end
 
-  context "when we are autotesting" do
-    it "autotests" do
-      @fb.testing.should == true
-    end
-  end
-
   context "when given a value that is not a number" do
     it "give a helpful message" do
       @fb.says("what am i").should == "Not a number"
