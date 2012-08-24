@@ -8,12 +8,12 @@ class TicTacToe
     @winning_combos = [ "012", "345", "678", "036", "147", "258", "048", "246" ]
   end
 
-  def take_square(player, spot_to_take)
-    return "Square is not on the board" if spot_to_take > @board.length
-    return "Square is already taken, choose again" if @board[spot_to_take].nil?
-    @players[player] << spot_to_take
+  def take_square(player, square_to_take)
+    return "Square is not on the board" if square_to_take > @board.length
+    return "Square is already taken, choose again" if @board[square_to_take].nil?
+    @players[player] << square_to_take
     @players[player].sort!
-    @board[spot_to_take] = nil
+    @board[square_to_take] = nil
     return "#{player} wins!" if is_winner?(player)
     return "The game is hung" if is_hung?
     "no winner"
