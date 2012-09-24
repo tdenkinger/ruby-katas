@@ -9,5 +9,5 @@ Then /^All of the spots are empty$/ do
 end
 
 Then /^Player (\d+) should have no chosen squares$/ do |arg1|
-  @game.player_squares(arg1).should be nil 
+  @game.is_player_clear?("player_#{arg1}").should be true
 end

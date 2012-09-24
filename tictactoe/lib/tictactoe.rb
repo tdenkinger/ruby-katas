@@ -1,6 +1,6 @@
 class TicTacToe
-  def initialize
-    @board = (0..8).to_a
+  def initialize(size=9)
+    @board = (0...size).to_a
     @total_number_of_squares = @board.length
     @winning_combos = [ "012", "345", "678", "036", "147", "258", "048", "246" ]
 
@@ -67,7 +67,7 @@ class TicTacToe
   end
 
   def is_player_clear?(player)
-    @players[player].count == 0 ? true : false
+    @players[player.to_sym].count == 0 ? true : false
   end
 
   def is_board_clear?

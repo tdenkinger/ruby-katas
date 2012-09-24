@@ -10,14 +10,3 @@ Feature: Players claim squares in turn
     When Player 1 takes a square
     Then The taken square is no long available
 
-  Scenario: Player 2 takes a square
-    Given Player 1 has taken a square 
-    When Player 2 takes a square
-    Then Player 2 owns the square
-
-  Scenario: Player 2 takes a square
-    Given Player 1 has taken a square 
-    When Player 2 takes a square
-    Then The taken square is no longer available 
-
-
